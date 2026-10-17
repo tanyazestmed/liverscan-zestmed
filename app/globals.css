@@ -1,0 +1,59 @@
+@import "tailwindcss";
+
+/* ===== สี / ฟอนต์ / ขนาดตัวอักษร — แก้ที่นี่ที่เดียว ===== */
+:root {
+  --navy: #173b57; /* น้ำเงินกรมท่า: หัวข้อ, ข้อความสำคัญ */
+  --mint: #62bfae; /* เขียวมิ้นต์: สีเสริม, ปุ่ม */
+  --mint-dark: #4aa897;
+  --white: #ffffff; /* พื้นหลังหลัก */
+  --sky: #f2f7fa; /* ฟ้าอ่อน: พื้นหลังแบ่งส่วน */
+  --ink: #2b3a47; /* ตัวอักษรเนื้อหา */
+  --muted: #5f7280; /* ตัวอักษรรอง */
+  --line: #dde7ee;
+  --line-green: #06c755; /* สีปุ่ม LINE */
+
+  --text-sm: 0.9rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.5rem;
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-mint: var(--mint);
+  --color-mint-dark: var(--mint-dark);
+  --color-sky: var(--sky);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-line-green: var(--line-green);
+  --font-sans: var(--font-thai), "Segoe UI", sans-serif;
+  --text-sm: var(--text-sm);
+  --text-base: var(--text-base);
+  --text-lg: var(--text-lg);
+  --text-xl: var(--text-xl);
+  --text-2xl: var(--text-2xl);
+  --text-3xl: var(--text-3xl);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.7;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--navy);
+  line-height: 1.3;
+  font-weight: 700;
+}

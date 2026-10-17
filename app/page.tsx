@@ -1,6 +1,7 @@
 import Image from "next/image";
 import DevicePopup from "./components/DevicePopup";
 import ZoomImage from "./components/ZoomImage";
+import LiverMascot from "./components/LiverMascot";
 import deviceBadge from "@/public/images/device-badge.webp";
 import lsmMap from "@/public/images/lsm-map.webp";
 import bmode from "@/public/images/bmode.webp";
@@ -47,6 +48,45 @@ const facts = [
   { label: "เวลาตรวจ", value: "ประมาณ 1 นาที" },
   { label: "แบตเตอรี่", value: "ใช้งานได้ ≥ 4 ชั่วโมง" },
   { label: "การรับประกัน", value: "2 ปี" },
+];
+
+const stages = [
+  {
+    name: "ตับปกติ",
+    status: "สุขภาพดี",
+    desc: "ไม่มีไขมันสะสมเกิน ไม่มีพังผืด ตับทำงานได้เต็มที่",
+    measure: "",
+    card: "border-mint/40 bg-mint/5",
+    dot: "bg-mint",
+    tag: "bg-mint/15 text-mint-dark",
+  },
+  {
+    name: "ไขมันพอกตับ",
+    status: "ระยะเริ่มต้น • ฟื้นฟูได้",
+    desc: "ไขมันสะสมในเซลล์ตับ มักไม่มีอาการ ปรับพฤติกรรมแล้วกลับมาดีได้",
+    measure: "LIVERSCAN วัดไขมันในตับ (MAP)",
+    card: "border-[#F3BA5C]/50 bg-[#F3BA5C]/5",
+    dot: "bg-[#E9A23B]",
+    tag: "bg-[#F3BA5C]/20 text-[#9A6412]",
+  },
+  {
+    name: "พังผืดในตับ",
+    status: "ต้องดูแลใกล้ชิด",
+    desc: "ตับอักเสบต่อเนื่องจนเกิดพังผืด ยังชะลอหรือดีขึ้นได้หากรักษาทัน",
+    measure: "LIVERSCAN วัดความแข็งของตับ (LSM)",
+    card: "border-[#BE6A50]/40 bg-[#BE6A50]/5",
+    dot: "bg-[#BE6A50]",
+    tag: "bg-[#BE6A50]/15 text-[#8A3F28]",
+  },
+  {
+    name: "ตับแข็ง",
+    status: "ระยะรุนแรง",
+    desc: "พังผืดสะสมจนเนื้อตับแข็ง เสี่ยงภาวะแทรกซ้อนรุนแรง ฟื้นฟูได้ยาก",
+    measure: "",
+    card: "border-[#7D4636]/40 bg-[#7D4636]/5",
+    dot: "bg-[#7D4636]",
+    tag: "bg-[#7D4636]/15 text-[#5E3226]",
+  },
 ];
 
 const evidence = [
@@ -152,6 +192,7 @@ export default function Home() {
             <span className="text-sm text-muted">by Zest-Med</span>
           </a>
           <nav className="hidden gap-6 text-sm font-medium text-ink md:flex">
+            <a href="#stages" className="hover:text-navy">ตับ 4 ระยะ</a>
             <a href="#features" className="hover:text-navy">จุดเด่น</a>
             <a href="#evidence" className="hover:text-navy">งานวิจัย</a>
             <a href="#products" className="hover:text-navy">สินค้าและบริการ</a>
@@ -234,6 +275,68 @@ export default function Home() {
               <p className="font-semibold text-navy">FDA 510(k) Cleared</p>
               <p className="text-muted">K233401 • K242496</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Liver stages (mascots) ===== */}
+      <section id="stages" className="relative overflow-hidden bg-white">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <p className="text-sm font-medium text-mint-dark">ตับ 4 ระยะ</p>
+          <h2 className="mt-1 text-2xl md:text-3xl">ตับไม่เคยบ่น… จนวันที่สายเกินไป</h2>
+          <p className="mt-3 max-w-2xl text-muted">
+            ไขมันพอกตับและพังผืดระยะแรกมักไม่มีอาการ ผู้รับบริการส่วนใหญ่จึงไม่รู้ตัว
+            การตรวจคัดกรองช่วยให้รู้ทันตั้งแต่ระยะที่ยังกลับมาดีได้
+          </p>
+
+          <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
+            {stages.map((s, i) => (
+              <article
+                key={s.name}
+                className={`relative flex flex-col rounded-3xl border p-4 md:p-5 ${s.card}`}
+              >
+                <span
+                  className={`absolute left-3 top-3 flex h-7 w-7 items-center justify-center rounded-full text-sm font-bold text-white ${s.dot}`}
+                >
+                  {i + 1}
+                </span>
+                <div className={`mx-auto w-full max-w-[180px] ${i === 0 ? "motion-safe:animate-float" : ""}`}>
+                  <LiverMascot stage={(i + 1) as 1 | 2 | 3 | 4} />
+                </div>
+                <h3 className="mt-2 text-lg">{s.name}</h3>
+                <span className={`mt-1 self-start rounded-full px-2.5 py-0.5 text-xs font-semibold ${s.tag}`}>
+                  {s.status}
+                </span>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">{s.desc}</p>
+                {s.measure && (
+                  <p className="mt-3 rounded-xl bg-sky px-3 py-2 text-xs font-medium leading-snug text-navy">
+                    🔍 {s.measure}
+                  </p>
+                )}
+              </article>
+            ))}
+          </div>
+
+          {/* แถบบอกโอกาสฟื้นฟู */}
+          <div className="mt-6">
+            <div className="h-2.5 rounded-full bg-gradient-to-r from-mint via-[#F3BA5C] to-[#7D4636]" />
+            <div className="mt-2 flex justify-between text-xs font-medium text-muted">
+              <span>← ตรวจเจอเร็ว ฟื้นฟูได้</span>
+              <span>ฟื้นฟูได้ยาก →</span>
+            </div>
+          </div>
+
+          <div className="mt-10 flex flex-col items-center gap-5 rounded-3xl bg-sky p-6 text-center md:flex-row md:p-8 md:text-left">
+            <div className="flex-1">
+              <h3 className="text-xl md:text-2xl">
+                รู้ทันตั้งแต่ระยะที่ 2 ด้วย LIVERSCAN ในเวลาประมาณ 1 นาที
+              </h3>
+              <p className="mt-2 text-muted">
+                วัดทั้งไขมันสะสมและความแข็งของตับในการตรวจครั้งเดียว ไม่ต้องเจาะ ไม่เจ็บ
+                ช่วยแพทย์วางแผนดูแลผู้รับบริการก่อนเข้าสู่ระยะรุนแรง
+              </p>
+            </div>
+            <LineButton className="w-full shrink-0 md:w-auto" />
           </div>
         </div>
       </section>

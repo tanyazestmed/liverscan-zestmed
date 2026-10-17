@@ -1,3 +1,20 @@
+import Image from "next/image";
+import DevicePopup from "./components/DevicePopup";
+import ZoomImage from "./components/ZoomImage";
+import deviceBadge from "@/public/images/device-badge.webp";
+import lsmMap from "@/public/images/lsm-map.webp";
+import bmode from "@/public/images/bmode.webp";
+import preventive from "@/public/images/preventive-screening.webp";
+import portable from "@/public/images/portable.webp";
+import auroc092 from "@/public/images/auroc-092.webp";
+import auroc097 from "@/public/images/auroc-097.webp";
+import paired from "@/public/images/paired-fibroscan.webp";
+import aiQc from "@/public/images/ai-qc.webp";
+import masld from "@/public/images/masld.webp";
+import glp1 from "@/public/images/glp1.webp";
+import fdaLogo from "@/public/images/fda.webp";
+import zestmedLogo from "@/public/images/zestmed-logo.png";
+
 const LINE_URL = "https://line.me/R/ti/p/@zestmed";
 const PHONE_DISPLAY = "02-682-9151–4";
 const PHONE_TEL = "tel:026829151";
@@ -8,41 +25,53 @@ const highlights = [
   {
     title: "ประเมินทั้งไขมันสะสมและความแข็งของตับ",
     body: "ให้ข้อมูลการสะสมไขมันและค่าความแข็งของเนื้อตับในการตรวจครั้งเดียว ช่วยแพทย์ประเมินภาวะไขมันพอกตับและพังผืด โดยไม่ต้องเจาะชิ้นเนื้อ",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-        <path d="M4 14c0-5 3-9 8-9s8 4 8 9c0 3-2 5-5 5h-6c-3 0-5-2-5-5Z" />
-        <path d="M8 13l2 2 3-4 3 3" />
-      </svg>
-    ),
+    image: lsmMap,
+    alt: "LIVERSCAN วัดค่า LSM และ MAP ในการตรวจครั้งเดียว",
   },
   {
     title: "พกพาสะดวก พร้อมภาพช่วยนำทางขณะตรวจ",
     body: "ระบบไร้สาย น้ำหนักเบา พร้อมภาพอัลตราซาวนด์ B-mode แบบเรียลไทม์ช่วยกำหนดตำแหน่งตรวจ ใช้ได้ทั้งในโรงพยาบาล คลินิก และหน่วยบริการเคลื่อนที่",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-        <rect x="5" y="3" width="14" height="18" rx="2" />
-        <path d="M9 7h6M9 11h6M9 15h3" />
-      </svg>
-    ),
+    image: bmode,
+    alt: "ภาพ B-mode แบบเรียลไทม์ช่วยกำหนดตำแหน่งตรวจ",
   },
   {
     title: "ทีม Zest-Med สนับสนุนการใช้งานในไทย",
     body: "สาธิตเครื่อง อบรมบุคลากร แนะนำการประยุกต์ใช้ในบริการของท่าน และดูแลหลังการขาย เพื่อให้สถานพยาบาลเริ่มใช้งานได้จริงอย่างมั่นใจ",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
-        <circle cx="9" cy="8" r="3" />
-        <circle cx="17" cy="9" r="2.5" />
-        <path d="M3 19c0-3 3-5 6-5s6 2 6 5M15 18c0-2 2-4 5-4" />
-      </svg>
-    ),
+    image: preventive,
+    alt: "เจ้าหน้าที่ใช้ LIVERSCAN ตรวจผู้รับบริการ",
   },
 ];
 
 const facts = [
   { label: "เทคโนโลยี", value: "Transient Elastography (TE)" },
   { label: "เวลาตรวจ", value: "ประมาณ 1 นาที" },
-  { label: "การรับรอง", value: "US FDA 510(k) Clearance" },
+  { label: "แบตเตอรี่", value: "ใช้งานได้ ≥ 4 ชั่วโมง" },
   { label: "การรับประกัน", value: "2 ปี" },
+];
+
+const evidence = [
+  { value: "0.97", label: "AUROC ตรวจพบภาวะตับแข็ง (F4)", image: auroc097 },
+  { value: "0.92", label: "AUROC ตรวจพบไขมันพอกตับ (≥S1)", image: auroc092 },
+  { value: "1,455", label: "คู่การตรวจเทียบกับ FibroScan®", image: paired },
+  { value: "> 90%", label: "อัตราตรวจสำเร็จ ด้วย AI Quality Control", image: aiQc },
+];
+
+const useCases = [
+  {
+    title: "ไขมันพอกตับ (MASLD)",
+    body: "คัดกรองและติดตามผู้ที่มีความเสี่ยงไขมันพอกตับได้เร็วขึ้น",
+    image: masld,
+  },
+  {
+    title: "GLP-1 และการรักษาเมตาบอลิก",
+    body: "ติดตามการเปลี่ยนแปลงของไขมันในตับระหว่างการควบคุมน้ำหนักและการรักษา",
+    image: glp1,
+  },
+  {
+    title: "ตรวจสุขภาพเชิงป้องกัน",
+    body: "เพิ่มรายการตรวจตับในโปรแกรมตรวจสุขภาพ Wellness และ Longevity",
+    image: preventive,
+  },
 ];
 
 const products = [
@@ -124,6 +153,7 @@ export default function Home() {
           </a>
           <nav className="hidden gap-6 text-sm font-medium text-ink md:flex">
             <a href="#features" className="hover:text-navy">จุดเด่น</a>
+            <a href="#evidence" className="hover:text-navy">งานวิจัย</a>
             <a href="#products" className="hover:text-navy">สินค้าและบริการ</a>
             <a href="#faq" className="hover:text-navy">คำถามที่พบบ่อย</a>
             <a href="#contact" className="hover:text-navy">ติดต่อเรา</a>
@@ -144,7 +174,7 @@ export default function Home() {
       <section id="top" className="relative overflow-hidden bg-sky">
         <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full bg-mint/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-navy/10 blur-3xl" />
-        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-2 md:items-center md:py-24">
+        <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-2 md:items-center md:py-24">
           <div>
             <p className="mb-3 inline-block rounded-full bg-mint/15 px-3 py-1 text-sm font-medium text-mint-dark">
               เครื่องมือแพทย์สำหรับสถานพยาบาล
@@ -167,53 +197,44 @@ export default function Home() {
             </div>
           </div>
 
-          {/* ภาพประกอบแทนรูปเครื่อง (เปลี่ยนเป็นรูปจริงได้ภายหลัง) */}
-          <div className="relative mx-auto w-full max-w-md">
-            <div className="rounded-3xl bg-white p-6 shadow-xl shadow-navy/10">
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-semibold text-navy">LIVERSCAN</span>
-                <span className="rounded-full bg-mint/15 px-2 py-0.5 text-xs font-medium text-mint-dark">
-                  Wireless
-                </span>
-              </div>
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                <div className="rounded-2xl bg-sky p-4">
-                  <p className="text-xs text-muted">ความแข็งของตับ</p>
-                  <p className="mt-1 text-2xl font-bold text-navy">
-                    5.2 <span className="text-sm font-medium text-muted">kPa</span>
-                  </p>
-                </div>
-                <div className="rounded-2xl bg-sky p-4">
-                  <p className="text-xs text-muted">ไขมันสะสมในตับ</p>
-                  <p className="mt-1 text-2xl font-bold text-navy">
-                    215 <span className="text-sm font-medium text-muted">dB/m</span>
-                  </p>
-                </div>
-              </div>
-              <div className="mt-3 flex h-28 items-end gap-1 rounded-2xl bg-navy p-3">
-                {[30, 55, 40, 70, 60, 85, 50, 65, 45, 75, 35, 60].map((h, i) => (
-                  <div
-                    key={i}
-                    className="flex-1 rounded-sm bg-mint/80"
-                    style={{ height: `${h}%` }}
-                  />
-                ))}
-              </div>
-              <p className="mt-3 text-center text-xs text-muted">ตัวอย่างหน้าจอแสดงผล (ภาพจำลอง)</p>
-            </div>
+          <div className="relative mx-auto w-full max-w-sm md:max-w-md">
+            <button
+              type="button"
+              data-open-device
+              className="group block w-full cursor-pointer"
+              aria-label="ดูรายละเอียดเครื่อง LIVERSCAN"
+            >
+              <Image
+                src={deviceBadge}
+                alt="เครื่อง LIVERSCAN หัวตรวจไร้สาย"
+                priority
+                sizes="(max-width: 768px) 90vw, 448px"
+                className="h-auto w-full rounded-full shadow-2xl shadow-navy/20 transition duration-300 group-hover:scale-[1.02]"
+              />
+              <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-4 py-1.5 text-sm font-semibold text-navy shadow-lg">
+                👆 แตะเพื่อดูเครื่อง
+              </span>
+            </button>
           </div>
         </div>
       </section>
 
       {/* ===== Facts strip ===== */}
       <section className="border-b border-line bg-white">
-        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 py-8 md:grid-cols-4">
+        <div className="mx-auto grid max-w-6xl grid-cols-2 gap-6 px-4 py-8 md:grid-cols-5 md:items-center">
           {facts.map((f) => (
             <div key={f.label}>
               <p className="text-sm text-muted">{f.label}</p>
               <p className="font-semibold text-navy">{f.value}</p>
             </div>
           ))}
+          <div className="col-span-2 flex items-center gap-3 rounded-2xl bg-sky p-3 md:col-span-1">
+            <Image src={fdaLogo} alt="US FDA" className="h-11 w-11 shrink-0 rounded-lg bg-white" />
+            <div className="text-sm leading-snug">
+              <p className="font-semibold text-navy">FDA 510(k) Cleared</p>
+              <p className="text-muted">K233401 • K242496</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -225,35 +246,99 @@ export default function Home() {
         </p>
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {highlights.map((h) => (
-            <article key={h.title} className="rounded-3xl border border-line bg-white p-6 shadow-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-mint/15 text-mint-dark [&>svg]:h-7 [&>svg]:w-7">
-                {h.icon}
+            <article key={h.title} className="overflow-hidden rounded-3xl border border-line bg-white shadow-sm">
+              <ZoomImage
+                src={h.image}
+                alt={h.alt}
+                className="aspect-square [&_img]:h-full [&_img]:object-cover [&_img]:object-top"
+              />
+              <div className="p-6">
+                <h3 className="text-lg">{h.title}</h3>
+                <p className="mt-2 text-muted">{h.body}</p>
               </div>
-              <h3 className="mt-5 text-lg">{h.title}</h3>
-              <p className="mt-2 text-muted">{h.body}</p>
             </article>
           ))}
         </div>
       </section>
 
-      {/* ===== Audiences ===== */}
-      <section className="bg-sky">
-        <div className="mx-auto max-w-6xl px-4 py-14">
-          <h2 className="text-2xl md:text-3xl">เหมาะกับสถานพยาบาลแบบไหน</h2>
-          <div className="mt-6 flex flex-wrap gap-3">
-            {audiences.map((a) => (
-              <span
-                key={a}
-                className="rounded-full border border-line bg-white px-4 py-2 font-medium text-navy"
-              >
-                {a}
-              </span>
+      {/* ===== Clinical evidence ===== */}
+      <section id="evidence" className="bg-navy text-white">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <p className="text-sm font-medium text-mint">หลักฐานทางคลินิก</p>
+          <h2 className="mt-1 text-2xl text-white md:text-3xl">ผลแม่นยำ ยืนยันด้วยงานวิจัย</h2>
+          <p className="mt-3 max-w-2xl text-white/80">
+            ศึกษาเปรียบเทียบกับการตรวจชิ้นเนื้อตับในผู้ป่วย 138 ราย และเทียบกับเครื่อง FibroScan®
+            แบบดั้งเดิม 1,455 คู่การตรวจ ตีพิมพ์ในวารสาร Liver International (2026)
+          </p>
+          <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-4">
+            {evidence.map((e) => (
+              <div key={e.label} className="overflow-hidden rounded-3xl bg-white/5 ring-1 ring-white/10">
+                <ZoomImage src={e.image} alt={e.label} sizes="(max-width: 768px) 50vw, 280px" />
+                <div className="p-4">
+                  <p className="text-2xl font-bold text-mint md:text-3xl">{e.value}</p>
+                  <p className="mt-1 text-sm leading-snug text-white/80">{e.label}</p>
+                </div>
+              </div>
             ))}
           </div>
-          <p className="mt-6 max-w-2xl text-muted">
-            นำไปใช้ในโปรแกรมตรวจสุขภาพ ติดตามผู้ป่วยไขมันพอกตับ (MASLD) ผู้ป่วยเบาหวาน
-            และการติดตามผลระหว่างการรักษาด้านเมตาบอลิก
+          <p className="mt-6 text-xs text-white/50">
+            อ้างอิง: Huang ZH. et al. Liver International. 2026;46:e70634 • แตะรูปเพื่อขยาย
           </p>
+        </div>
+      </section>
+
+      {/* ===== Use cases & audiences ===== */}
+      <section className="bg-sky">
+        <div className="mx-auto max-w-6xl px-4 py-16 md:py-20">
+          <h2 className="text-2xl md:text-3xl">นำไปใช้ในบริการได้หลากหลาย</h2>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {useCases.map((u) => (
+              <article key={u.title} className="overflow-hidden rounded-3xl bg-white shadow-sm">
+                <ZoomImage
+                  src={u.image}
+                  alt={u.title}
+                  className="aspect-[4/3] [&_img]:h-full [&_img]:object-cover [&_img]:object-top"
+                />
+                <div className="p-6">
+                  <h3 className="text-lg">{u.title}</h3>
+                  <p className="mt-2 text-muted">{u.body}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="mt-14 grid gap-8 md:grid-cols-2 md:items-center">
+            <ZoomImage
+              src={portable}
+              alt="LIVERSCAN ออกแบบให้พกพาไปใช้ได้ทุกที่"
+              className="rounded-3xl shadow-lg"
+              sizes="(max-width: 768px) 100vw, 560px"
+            />
+            <div>
+              <h2 className="text-2xl md:text-3xl">เหมาะกับสถานพยาบาลแบบไหน</h2>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {audiences.map((a) => (
+                  <span
+                    key={a}
+                    className="rounded-full border border-line bg-white px-4 py-2 font-medium text-navy"
+                  >
+                    {a}
+                  </span>
+                ))}
+              </div>
+              <p className="mt-6 text-muted">
+                น้ำหนักเบาและไร้สาย ใช้ได้ทั้งข้างเตียงผู้ป่วย ห้องตรวจผู้ป่วยนอก
+                หน่วยตรวจสุขภาพเคลื่อนที่ และงานวิจัยทางคลินิก
+              </p>
+              <button
+                type="button"
+                data-open-device
+                className="mt-6 rounded-full border-2 border-navy px-6 py-2.5 font-semibold text-navy transition hover:bg-navy hover:text-white"
+              >
+                ดูรายละเอียดเครื่อง
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -365,6 +450,7 @@ export default function Home() {
       {/* ===== Footer ===== */}
       <footer className="border-t border-line bg-white pb-24 md:pb-8">
         <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-muted">
+          <Image src={zestmedLogo} alt="Zest-Med" className="mb-3 h-14 w-auto" />
           <p className="font-semibold text-navy">LIVERSCAN by Zest-Med</p>
           <p className="mt-1">
             จัดจำหน่ายโดย บริษัท เซสท์-เมด จำกัด ผู้แทนจำหน่ายอย่างเป็นทางการในประเทศไทย
@@ -375,6 +461,8 @@ export default function Home() {
           <p className="mt-3">© 2026 Zest-Med Co., Ltd.</p>
         </div>
       </footer>
+
+      <DevicePopup />
 
       {/* ===== ปุ่ม LINE ลอยบนมือถือ ===== */}
       <div className="fixed inset-x-0 bottom-0 z-30 border-t border-line bg-white/95 p-3 backdrop-blur md:hidden">
